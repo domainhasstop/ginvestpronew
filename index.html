@@ -86,7 +86,8 @@
         .chat-button {
             background-color: var(--primary-color);
             color: white;
-            padding: 10px 20px;
+            /* Padding ringkas untuk memberi ruang lebih ke input */
+            padding: 10px 12px; 
             border-radius: 9999px; /* Full rounded (pill shape) */
             font-weight: 600;
             box-shadow: 0 4px 6px rgba(66, 153, 225, 0.4);
@@ -104,8 +105,11 @@
         .message-bubble {
             padding: 10px 16px;
             border-radius: 18px; /* Lebih rounded */
-            word-wrap: break-word;
-            max-width: 85%;
+            /* Kunci Perubahan: Pastikan ia inline-block untuk mengambil lebar minimal */
+            display: inline-block; 
+            /* Hapus max-width dari sini; batas lebar diatur oleh kontainer parent (max-w-[95%]) */
+            overflow-wrap: break-word; 
+            word-break: normal;
             font-size: 0.95rem;
             line-height: 1.4;
             margin-bottom: 2px;
@@ -558,7 +562,8 @@
 
                 return `
                     <div class="flex ${isCurrentUser ? 'justify-end' : 'justify-start'} w-full">
-                        <div class="flex flex-col ${isCurrentUser ? 'items-end' : 'items-start'}">
+                        <!-- PERUBAHAN UTAMA DI SINI: max-w-[95%] membatasi kontainer, bukan bubble-nya. -->
+                        <div class="flex flex-col ${isCurrentUser ? 'items-end' : 'items-start'} max-w-[95%]">
                             <!-- Nama Pengirim (di atas bubble, kecuali jika BOT) -->
                             ${nameHtml} 
                             
